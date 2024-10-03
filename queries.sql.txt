@@ -1,0 +1,362 @@
+SHOW DATABASES;
+CREATE DATABASE MyProject;
+USE MyProject;
+
+CREATE TABLE Movie
+(
+movie_ID VARCHAR(5) NOT NULL,
+movie_title VARCHAR (20) NOT NULL,
+movie_director VARCHAR(20) NOT NULL,
+movie_length INT NOT NULL,
+movie_genre VARCHAR (15) NOT NULL,
+movie_type ENUM ('18+', 'ALL') NOT NULL,
+movie_main_lead LONGTEXT NOT NULL,
+movie_lang SET('Hindi', 'English', 'French', 'Spanish', 'Tamil') NOT NULL,
+movie_rating DECIMAL(2,1) NOT NULL,
+movie_release_date DATE NOT NULL,
+movie_producer VARCHAR(20) NOT NULL,
+movie_singer MEDIUMTEXT NOT NULL,
+PRIMARY KEY (movie_ID)
+);
+
+INSERT INTO Movie VALUES
+('M1','Avatar','James Cameron',162,'Sci-Fi','ALL','Sam Worthington','English', 9.2, '2009-12-18','James Cameron','Aaron Hayes');
+INSERT INTO Movie VALUES
+('M2','Titanic','James Cameron',195,'Drama','ALL','Leonardo DiCaprio','English', 9.6, '1998-03-13','James Cameron','Céline Dion');
+INSERT INTO Movie VALUES
+('M3','The Godfather','Francis Ford Coppola',175,'Crime and Drama','ALL','Marlon Brando','English', 9.2, '1972-06-19','Albert S. Ruddy','Nino Rota');
+INSERT INTO Movie VALUES
+('M4','The Wizard of Oz','Victor Fleming',102,'Adventure','ALL','Judy Garland','English', 8.1, '1939-08-25','Mervyn LeRoy','Judy Garland');
+INSERT INTO Movie VALUES
+('M5','Udaan','Vikramaditya Motwane',134,'Drama','ALL','Rajat Barmecha','Hindi', 8.1, '2010-07-16','Anurag Kashyap','Shweta Punjali');
+INSERT INTO Movie VALUES
+('M6','3 Idiots','Rajkumar Hirani',170,'Comedy','ALL','Aamir Khan','Hindi', 8.4, '2009-12-25','Vidhu Vinod Chopra','Sonu Nigam');
+INSERT INTO Movie VALUES
+('M7','OMG: Oh My God!','Umesh Shukla',125,'Comedy and Fantacy','ALL','Akshay Kumar','Hindi', 8.1, '2012-09-28','Akshay Kumar','Jagjit Singh');
+INSERT INTO Movie VALUES
+('M8','Pink','Aniruddha Roy Chowdhury',136,'Thriller','ALL','Amitabh Bachchan','Hindi', 9.1, '2016-09-16','Ronnie Lahiri','Shoojit Sircar');
+
+
+
+
+
+
+CREATE TABLE Hall
+(
+hall_ID VARCHAR(4) NOT NULL,
+no_of_seats INT NOT NULL,
+hall_name SET ('Platinum','Executive', 'Royal') NOT NULL,
+hall_address_block TINYTEXT NOT NULL,
+hall_address_floor TINYINT NOT NULL,
+PRIMARY KEY (hall_ID)
+);
+
+INSERT INTO Hall VALUES
+('H1',8,'Platinum','Block A',4);
+INSERT INTO Hall VALUES
+('H2',6,'Executive','Block C',2);
+INSERT INTO Hall VALUES
+('H3',4,'Royal','Block D',5);
+INSERT INTO Hall VALUES
+('H4',12,'Executive','Block B',8);
+
+
+
+CREATE TABLE People
+(
+people_ID VARCHAR(10) NOT NULL,
+name VARCHAR(20) NOT NULL,
+age INT NOT NULL,
+gender ENUM ('Male','Female','Other'),
+phone_number CHAR(10) NOT NULL,
+PRIMARY KEY (people_ID)
+);
+
+INSERT INTO People VALUES
+('P1','Mehul',19,'Male','9897654651');
+INSERT INTO People VALUES
+('P2','Parth',20,'Male','8897544651');
+INSERT INTO People VALUES
+('P3','Riya',19,'Female','8797654651');
+INSERT INTO People VALUES
+('P4','Priyal',20,'Male','9890446059');
+INSERT INTO People VALUES
+('P5','Sanya',19,'Female','7897654658');
+INSERT INTO People VALUES
+('P6','Vinay',20,'Other','7895644656');
+INSERT INTO People VALUES
+('P7','Rishabh',19,'Male','9890054651');
+INSERT INTO People VALUES
+('P8','Sreshth',32,'Male','8887744651');
+INSERT INTO People VALUES
+('P9','Riya',78,'Female','7090004651');
+INSERT INTO People VALUES
+('P10','Trisha',20,'Female','989111119');
+INSERT INTO People VALUES
+('P11','Sita',19,'Female','7897654658');
+INSERT INTO People VALUES
+('P12','Vidhur',20,'Other','7695444654');
+INSERT INTO People VALUES
+('P13','Pranav',12,'Male','9898888851');
+INSERT INTO People VALUES
+('P14','Amandeep',22,'Male','9887700231');
+INSERT INTO People VALUES
+('P15','Kiara',48,'Female','9887004651');
+INSERT INTO People VALUES
+('P16','Trisha',20,'Female','7691117650');
+INSERT INTO People VALUES
+('P17','Akansha',16,'Female','9800725389');
+INSERT INTO People VALUES
+('P18','Pranjal',27,'Other','7987654903');
+INSERT INTO People VALUES
+('P19','Rohit',57,'Male','9899905389');
+INSERT INTO People VALUES
+('P20','Samay',27,'Male','8986664909');
+
+
+
+CREATE TABLE Screening
+(
+screening_ID VARCHAR(5) NOT NULL,
+movie_ID VARCHAR(5) NOT NULL,
+hall_ID VARCHAR(4) NOT NULL,
+screen_time TIME NOT NULL,
+screen_date DATE NOT NULL,
+PRIMARY KEY (screening_ID),
+FOREIGN KEY (movie_ID) REFERENCES Movie (movie_ID),
+FOREIGN KEY (hall_ID) REFERENCES Hall (hall_ID)
+);
+
+INSERT INTO Screening VALUES
+('SCR1','M1','H1','17:35:00','2022-10-05');
+INSERT INTO Screening VALUES
+('SCR2','M2','H2','15:25:00','2022-11-04');
+INSERT INTO Screening VALUES
+('SCR3','M2','H1','5:20:00','2022-12-04');
+INSERT INTO Screening VALUES
+('SCR4','M3','H4','9:45:00','2022-12-04');
+INSERT INTO Screening VALUES
+('SCR5','M1','H4','8:40:00','2022-10-25');
+INSERT INTO Screening VALUES
+('SCR6','M5','H2','16:45:00','2022-12-04');
+INSERT INTO Screening VALUES
+('SCR7','M7','H2','19:10:00','2022-12-04');
+INSERT INTO Screening VALUES
+('SCR8','M2','H3','2:50:00','2022-12-13');
+INSERT INTO Screening VALUES
+('SCR9','M2','H1','11:45:00','2022-11-12');
+INSERT INTO Screening VALUES
+('SCR10','M2','H1','9:50:00','2022-12-04');
+INSERT INTO Screening VALUES
+('SCR11','M2','H2','18:40:00','2022-10-24');
+INSERT INTO Screening VALUES
+('SCR12','M2','H2','19:45:00','2022-12-04');
+INSERT INTO Screening VALUES
+('SCR13','M6','H4','15:20:00','2022-12-04');
+INSERT INTO Screening VALUES
+('SCR14','M6','H3','8:15:00','2022-12-04');
+INSERT INTO Screening VALUES
+('SCR15','M6','H1','13:15:00','2022-12-04');
+
+
+CREATE TABLE Seat
+(
+seat_ID VARCHAR(7) NOT NULL,
+seat_number INT NOT NULL,
+seat_row CHAR(1) NOT NULL,
+hall_ID VARCHAR(4) NOT NULL,
+PRIMARY KEY (seat_ID),
+FOREIGN KEY (hall_ID) REFERENCES Hall (hall_ID)
+);
+
+INSERT INTO Seat VALUES
+('H1S1',1,'A','H1');
+INSERT INTO Seat VALUES
+('H1S2',2,'D','H1');
+INSERT INTO Seat VALUES
+('H1S3',1,'B','H1');
+INSERT INTO Seat VALUES
+('H1S4',3,'C','H1');
+INSERT INTO Seat VALUES
+('H1S5',1,'A','H1');
+INSERT INTO Seat VALUES
+('H1S6',2,'C','H1');
+INSERT INTO Seat VALUES
+('H2S1',3,'B','H1');
+INSERT INTO Seat VALUES
+('H2S2',2,'D','H1');
+INSERT INTO Seat VALUES
+('H2S3',1,'R','H2');
+INSERT INTO Seat VALUES
+('H2S4',3,'C','H2');
+INSERT INTO Seat VALUES
+('H2S5',3,'R','H2');
+INSERT INTO Seat VALUES
+('H2S6',2,'B','H2');
+INSERT INTO Seat VALUES
+('H3S1',4,'A','H3');
+INSERT INTO Seat VALUES
+('H3S2',3,'D','H3');
+INSERT INTO Seat VALUES
+('H3S3',1,'R','H3');
+INSERT INTO Seat VALUES
+('H3S4',2,'A','H3');
+
+
+CREATE TABLE Booking
+(
+booking_ID VARCHAR(6) NOT NULL,
+price INT NOT NULL,
+screening_ID VARCHAR(5) NOT NULL,
+people_ID VARCHAR(10) NOT NULL,
+PRIMARY KEY (booking_ID),
+FOREIGN KEY (screening_ID) REFERENCES Screening(screening_ID),
+FOREIGN KEY (people_ID) REFERENCES People(people_ID)
+);
+
+INSERT INTO Booking Values
+('B1',1160,'SCR1','P20');
+INSERT INTO Booking Values
+('B2',150,'SCR2','P1');
+INSERT INTO Booking Values
+('B3',300,'SCR3','P2');
+INSERT INTO Booking Values
+('B4',110,'SCR4','P3');
+INSERT INTO Booking Values
+('B5',300,'SCR3','P4');
+INSERT INTO Booking Values
+('B6',150,'SCR2','P5');
+INSERT INTO Booking Values
+('B7',1160,'SCR4','P6');
+INSERT INTO Booking Values
+('B8',150,'SCR6','P7');
+INSERT INTO Booking Values
+('B9',300,'SCR7','P8');
+INSERT INTO Booking Values
+('B10',110,'SCR2','P9');
+INSERT INTO Booking Values
+('B11',300,'SCR9','P10');
+INSERT INTO Booking Values
+('B12',150,'SCR9','P11');
+INSERT INTO Booking Values
+('B13',150,'SCR6','P12');
+INSERT INTO Booking Values
+('B14',300,'SCR7','P13');
+INSERT INTO Booking Values
+('B15',110,'SCR2','P14');
+INSERT INTO Booking Values
+('B16',300,'SCR9','P15');
+INSERT INTO Booking Values
+('B17',150,'SCR9','P16');
+INSERT INTO Booking Values
+('B18',300,'SCR7','P17');
+INSERT INTO Booking Values
+('B19',110,'SCR2','P18');
+INSERT INTO Booking Values
+('B20',300,'SCR9','P19');
+
+
+
+CREATE TABLE Seat_Reserved
+(
+seat_reserv_ID VARCHAR(6) NOT NULL,
+screening_ID VARCHAR(5) NOT NULL,
+seat_ID VARCHAR(7) NOT NULL,
+booking_ID VARCHAR(6) NOT NULL,
+PRIMARY KEY (seat_reserv_ID),
+FOREIGN KEY (screening_ID) REFERENCES Screening (screening_ID),
+FOREIGN KEY (seat_ID) REFERENCES Seat (seat_ID),
+FOREIGN KEY (booking_ID) REFERENCES Booking (booking_ID)
+);
+
+INSERT INTO Seat_Reserved Values
+('SR1','SCR1','H1S2','B1');
+INSERT INTO Seat_Reserved Values
+('SR2','SCR2','H1S5','B2');
+INSERT INTO Seat_Reserved Values
+('SR3','SCR4','H2S1','B3');
+INSERT INTO Seat_Reserved Values
+('SR4','SCR3','H2S3','B4');
+INSERT INTO Seat_Reserved Values
+('SR5','SCR4','H2S6','B5');
+INSERT INTO Seat_Reserved Values
+('SR6','SCR2','H3S2','B6');
+
+-- TABLE DATA
+
+SELECT * FROM Movie;
+SELECT * FROM People;
+SELECT * FROM Screening;
+SELECT * FROM Booking;
+SELECT * FROM Hall;
+SELECT * FROM Seat;
+SELECT * FROM Seat_Reserved;
+
+
+
+DESCRIBE Movie;
+DESCRIBE People;
+DESCRIBE Screening;
+DESCRIBE Booking;
+DESCRIBE Hall;
+DESCRIBE Seat;
+DESCRIBE Seat_Reserved;
+
+
+
+-- QUERIES
+
+
+
+-- Which movie(s) were screened on 4th December, 2022?
+
+ SELECT movie_title, movie_director, movie_main_lead, movie_singer, movie_length, movie_genre, hall_ID
+ FROM Movie
+ INNER JOIN Screening
+ ON Screening.movie_ID = Movie.movie_ID
+ WHERE screen_date = "2022-12-04";
+
+
+-- Show the Seat Map of Royal Hall OR Platinum Hall
+
+SELECT seat_ID, seat_row, seat_number
+FROM Seat
+INNER JOIN Hall
+ON Seat.hall_ID = Hall.hall_ID
+WHERE hall_name = "Royal" OR "Platinum";
+
+
+-- Display the Date, Time and Hall when the film "Titanic" will be screened
+
+SELECT movie_title, hall_ID, screen_date, screen_time
+FROM Screening
+INNER JOIN Movie
+ON Screening.movie_ID = Movie.movie_ID
+WHERE movie_title = "Titanic";
+
+
+-- Show all the details of people who booked the film "Titanic"
+
+SELECT name, age, phone_number, gender
+FROM People
+INNER JOIN Booking
+ON People.people_ID = Booking.people_ID
+INNER JOIN Screening
+ON Screening.screening_ID = Booking.screening_ID
+INNER JOIN Movie
+ON Screening.movie_ID = Movie.movie_ID
+WHERE Movie_title = "Titanic";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
